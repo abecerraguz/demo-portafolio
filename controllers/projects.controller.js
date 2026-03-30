@@ -86,12 +86,18 @@ export const handleUploadImage = async (req, res, next) => {
         const fileName = `project_${Date.now()}${ext}`;
         const uploadPath = path.join(process.cwd(), 'public', 'uploads', fileName);
         // Mover archivo
-        await image.mv(uploadPath);
+        try {
+            await image.mv(uploadPath);
+        } catch (err) {
+            console.error('Error al mover archivo:', err);
+            return res.status(500).json({ error: 'Error al guardar la imagen', details: err.message });
+        }
         // Devolver URL relativa
         const fileUrl = `/uploads/${fileName}`;
         return res.json({ url: fileUrl });
     } catch (err) {
-        return next(err);
+        console.error('Error inesperado en subida:', err);
+        return res.status(500).json({ error: 'Error inesperado en el servidor', details: err.message });
     }
 };
 

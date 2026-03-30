@@ -5,6 +5,8 @@ import cors from 'cors';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
+import fs from 'fs';
+
 import fileUpload from 'express-fileupload';
 
 import { requestInfo } from '../middlewares/requestInfo.js';
@@ -20,6 +22,12 @@ const ROOT_DIR  = path.resolve(__dirname, '..');
 
 class Server {
     constructor() {
+        // Crear carpeta uploads si no existe
+        const uploadsDir = path.join(ROOT_DIR, 'public', 'uploads');
+        if (!fs.existsSync(uploadsDir)) {
+            fs.mkdirSync(uploadsDir, { recursive: true });
+            console.log('✓ Carpeta /public/uploads creada automáticamente');
+        }
         this.app      = express();
         this.port     = Number(process.env.PORT) || 3000;
         this.apiBase  = `/api/v1`;

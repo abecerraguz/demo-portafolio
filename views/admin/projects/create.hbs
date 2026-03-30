@@ -77,8 +77,10 @@
             const imageUrlInput = document.getElementById('image_url');
             const statusDiv = document.getElementById('upload_status');
             fileInput?.addEventListener('change', async function(e) {
+                e.preventDefault();
+                e.stopPropagation(); // Refuerzo: nunca submit
                 const file = fileInput.files[0];
-                if (!file) return;
+                if (!file) return false;
                 statusDiv.textContent = 'Subiendo imagen...';
                 const formData = new FormData();
                 formData.append('image', file);
@@ -97,6 +99,7 @@
                 } catch (err) {
                     statusDiv.textContent = 'Error al subir imagen.';
                 }
+                return false;
             });
         });
         </script>

@@ -17,6 +17,11 @@ if (process.env.DATABASE_URL) {
         },
         logging: false
     });
+} else if (process.env.NODE_ENV === 'production') {
+    // En producción sin DATABASE_URL → error claro en vez de intentar localhost
+    throw new Error(
+        'DATABASE_URL no está definida. En Railway: agrega la variable DATABASE_URL = ${{Postgres.DATABASE_URL}} en el servicio web.'
+    );
 } else {
     // Desarrollo local: usa variables individuales
     sequelize = new Sequelize(

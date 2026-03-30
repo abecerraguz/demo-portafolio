@@ -1,0 +1,91 @@
+<div class="card border-0 shadow-sm" style="max-width:720px">
+    <div class="card-header bg-transparent border-0 pt-4 pb-0 d-flex justify-content-between align-items-center">
+        <h5 class="fw-bold mb-0">
+            <i class="bi bi-pencil-square me-2 text-warning"></i>Editar Educación
+        </h5>
+        <a href="/admin/education" class="btn btn-sm btn-outline-secondary">
+            <i class="bi bi-arrow-left me-1"></i>Volver
+        </a>
+    </div>
+
+    <div class="card-body p-4">
+        <form action="/admin/education/{{edu.id}}" method="POST" novalidate>
+
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <label class="form-label fw-semibold">Institución <span class="text-danger">*</span></label>
+                    <input type="text" name="institution" class="form-control"
+                           value="{{edu.institution}}" required maxlength="200">
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label fw-semibold">Título / Grado <span class="text-danger">*</span></label>
+                    <input type="text" name="degree" class="form-control"
+                           value="{{edu.degree}}" required maxlength="200">
+                </div>
+
+                <div class="col-12">
+                    <label class="form-label fw-semibold">Campo de estudio</label>
+                    <input type="text" name="field_of_study" class="form-control"
+                           value="{{edu.field_of_study}}" maxlength="200"
+                           placeholder="ej: Ingeniería en Informática">
+                </div>
+
+                <div class="col-md-4">
+                    <label class="form-label fw-semibold">Año de inicio</label>
+                    <input type="number" name="start_year" class="form-control"
+                           value="{{edu.start_year}}" min="1950" max="2100">
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label fw-semibold">Año de término</label>
+                    <input type="number" name="end_year" class="form-control"
+                           value="{{edu.end_year}}" min="1950" max="2100">
+                </div>
+                <div class="col-md-4 d-flex align-items-end pb-2">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" name="is_current" id="is_current_edit"
+                               {{#if edu.is_current}}checked{{/if}}>
+                        <label class="form-check-label fw-semibold" for="is_current_edit">En curso</label>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <label class="form-label fw-semibold">Descripción</label>
+                    <textarea name="description" class="form-control" rows="3">{{edu.description}}</textarea>
+                </div>
+
+                <div class="col-12">
+                    <label class="form-label fw-semibold">URL del logo de la institución</label>
+                    <input type="url" name="logo_url" class="form-control"
+                           value="{{edu.logo_url}}"
+                           placeholder="https://ejemplo.com/logo.png">
+                </div>
+
+                <div class="col-md-4">
+                    <label class="form-label fw-semibold">Orden</label>
+                    <input type="number" name="display_order" class="form-control"
+                           value="{{edu.display_order}}" min="0">
+                </div>
+                <div class="col-md-4 d-flex align-items-end pb-2">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" name="is_active" id="is_active_edu_edit"
+                               {{#if edu.is_active}}checked{{/if}}>
+                        <label class="form-check-label fw-semibold" for="is_active_edu_edit">Visible</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex gap-2 mt-4">
+                <button type="submit" class="btn btn-warning px-4 text-dark fw-semibold">
+                    <i class="bi bi-save me-2"></i>Guardar cambios
+                </button>
+                <a href="/admin/education" class="btn btn-outline-secondary">Cancelar</a>
+                <form action="/admin/education/{{edu.id}}/delete" method="POST" class="ms-auto"
+                      onsubmit="return confirm('¿Eliminar este registro?')">
+                    <button type="submit" class="btn btn-outline-danger">
+                        <i class="bi bi-trash me-1"></i>Eliminar
+                    </button>
+                </form>
+            </div>
+        </form>
+    </div>
+</div>

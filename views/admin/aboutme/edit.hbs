@@ -1,0 +1,81 @@
+<div class="card border-0 shadow-sm" style="max-width:720px">
+    <div class="card-header bg-transparent border-0 pt-4 pb-0 d-flex justify-content-between align-items-center">
+        <h5 class="fw-bold mb-0">
+            <i class="bi bi-person-circle me-2 text-success"></i>Editar Sobre mí
+        </h5>
+        <a href="/admin/dashboard" class="btn btn-sm btn-outline-secondary">
+            <i class="bi bi-arrow-left me-1"></i>Dashboard
+        </a>
+    </div>
+
+    <div class="card-body p-4">
+        <form action="/admin/aboutme/edit" method="POST" novalidate>
+
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <label class="form-label fw-semibold">Título de sección</label>
+                    <input type="text" name="title" class="form-control"
+                           value="{{aboutMe.title}}" maxlength="150">
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label fw-semibold">Ubicación</label>
+                    <input type="text" name="location" class="form-control"
+                           value="{{aboutMe.location}}" placeholder="ej: Santiago, Chile">
+                </div>
+
+                <div class="col-12">
+                    <label class="form-label fw-semibold">Contenido / Descripción <span class="text-danger">*</span></label>
+                    <textarea name="content" class="form-control" rows="5"
+                              required>{{aboutMe.content}}</textarea>
+                    <div class="form-text">Cuéntanos sobre ti, tu experiencia y pasiones.</div>
+                </div>
+
+                <div class="col-12">
+                    <label class="form-label fw-semibold">Habilidades & Tecnologías</label>
+                    <input type="text" name="skills" class="form-control"
+                           value="{{aboutMe.skills_text}}"
+                           placeholder="ej: JavaScript, Node.js, React, PostgreSQL">
+                    <div class="form-text">Separa cada habilidad con una coma.</div>
+                </div>
+
+                <div class="col-12">
+                    <label class="form-label fw-semibold">URL de foto de perfil</label>
+                    <input type="url" name="profile_image" class="form-control"
+                           value="{{aboutMe.profile_image}}"
+                           placeholder="https://ejemplo.com/foto.jpg">
+                </div>
+
+                <div class="col-md-6">
+                    <label class="form-label fw-semibold">
+                        <i class="bi bi-github me-1"></i>GitHub URL
+                    </label>
+                    <input type="url" name="github_url" class="form-control"
+                           value="{{aboutMe.github_url}}"
+                           placeholder="https://github.com/usuario">
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label fw-semibold">
+                        <i class="bi bi-linkedin me-1"></i>LinkedIn URL
+                    </label>
+                    <input type="url" name="linkedin_url" class="form-control"
+                           value="{{aboutMe.linkedin_url}}"
+                           placeholder="https://linkedin.com/in/usuario">
+                </div>
+
+                <div class="col-md-6">
+                    <label class="form-label fw-semibold">Email de contacto</label>
+                    <input type="email" name="email" class="form-control"
+                           value="{{aboutMe.email}}"
+                           placeholder="tu@email.com">
+                </div>
+            </div>
+
+            <div class="d-flex gap-2 mt-4">
+                <button type="submit" class="btn btn-success px-4">
+                    <i class="bi bi-save me-2"></i>Guardar cambios
+                </button>
+                <a href="/admin/dashboard" class="btn btn-outline-secondary">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>

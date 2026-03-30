@@ -1,0 +1,67 @@
+<div class="card border-0 shadow-sm" style="max-width:720px">
+    <div class="card-header bg-transparent border-0 pt-4 pb-0 d-flex justify-content-between align-items-center">
+        <h5 class="fw-bold mb-0">
+            <i class="bi bi-person-badge me-2 text-primary"></i>Editar Presentación
+        </h5>
+        <a href="/admin/dashboard" class="btn btn-sm btn-outline-secondary">
+            <i class="bi bi-arrow-left me-1"></i>Dashboard
+        </a>
+    </div>
+
+    <div class="card-body p-4">
+        <form action="/admin/presentation/edit" method="POST" novalidate>
+
+            <div class="row g-3">
+                <div class="col-md-4">
+                    <label class="form-label fw-semibold">Saludo <small class="text-muted">(ej: Hola, soy)</small></label>
+                    <input type="text" name="greeting" class="form-control"
+                           value="{{presentation.greeting}}" maxlength="100">
+                </div>
+                <div class="col-md-8">
+                    <label class="form-label fw-semibold">Tu nombre <span class="text-danger">*</span></label>
+                    <input type="text" name="name" class="form-control"
+                           value="{{presentation.name}}" required maxlength="150">
+                </div>
+
+                <div class="col-12">
+                    <label class="form-label fw-semibold">Título profesional <span class="text-danger">*</span></label>
+                    <input type="text" name="title" class="form-control"
+                           value="{{presentation.title}}" required maxlength="200"
+                           placeholder="ej: Desarrollador Full Stack">
+                </div>
+
+                <div class="col-12">
+                    <label class="form-label fw-semibold">Subtítulo / tagline</label>
+                    <input type="text" name="subtitle" class="form-control"
+                           value="{{presentation.subtitle}}" maxlength="300"
+                           placeholder="ej: Construyendo experiencias digitales con pasión">
+                </div>
+
+                <div class="col-12">
+                    <label class="form-label fw-semibold">Descripción breve</label>
+                    <textarea name="description" class="form-control" rows="3"
+                              maxlength="500">{{presentation.description}}</textarea>
+                </div>
+
+                <div class="col-md-6">
+                    <label class="form-label fw-semibold">Texto del botón CTA</label>
+                    <input type="text" name="cta_text" class="form-control"
+                           value="{{presentation.cta_text}}" maxlength="80">
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label fw-semibold">URL del botón CTA</label>
+                    <input type="text" name="cta_url" class="form-control"
+                           value="{{presentation.cta_url}}" maxlength="200"
+                           placeholder="ej: #projects">
+                </div>
+            </div>
+
+            <div class="d-flex gap-2 mt-4">
+                <button type="submit" class="btn btn-primary px-4">
+                    <i class="bi bi-save me-2"></i>Guardar cambios
+                </button>
+                <a href="/admin/dashboard" class="btn btn-outline-secondary">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>

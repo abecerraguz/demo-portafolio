@@ -1,0 +1,64 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+   Admin Dashboard — admin.css
+   ───────────────────────────────────────────────────────────────────────────── */
+
+/* ── Layout ──────────────────────────────────────────────────────────────── */
+body.admin-body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; }
+
+#admin-wrapper { min-height: 100vh; }
+
+.sidebar {
+    width: 260px;
+    min-height: 100vh;
+    flex-shrink: 0;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+    transition: width 0.3s;
+}
+
+.admin-content { min-height: 100vh; overflow-x: hidden; }
+
+.admin-topbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+/* ── Sidebar nav ─────────────────────────────────────────────────────────── */
+.sidebar-link {
+    border-radius: 0.5rem;
+    padding: 0.6rem 0.85rem;
+    transition: background 0.2s;
+    font-size: 0.9rem;
+}
+.sidebar-link:hover  { background: rgba(255,255,255,0.12); }
+.sidebar-link.active { background: rgba(255,255,255,0.18); font-weight: 600; }
+
+/* ── Login card ──────────────────────────────────────────────────────────── */
+.login-card { width: 100%; max-width: 440px; }
+
+/* ── Dashboard cards ─────────────────────────────────────────────────────── */
+.icon-box { width: 56px; height: 56px; flex-shrink: 0; }
+
+/* ── Tables ──────────────────────────────────────────────────────────────── */
+.table thead th {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #6c757d;
+    font-weight: 600;
+}
+
+/* ── Responsive sidebar ──────────────────────────────────────────────────── */
+@media (max-width: 767px) {
+    .sidebar {
+        position: fixed;
+        left: -260px;
+        z-index: 200;
+        transition: left 0.3s;
+    }
+    .sidebar.open { left: 0; }
+    .admin-content { width: 100%; }
+}

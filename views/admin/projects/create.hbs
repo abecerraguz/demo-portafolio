@@ -1,0 +1,72 @@
+<div class="card border-0 shadow-sm" style="max-width:720px">
+    <div class="card-header bg-transparent border-0 pt-4 pb-0 d-flex justify-content-between align-items-center">
+        <h5 class="fw-bold mb-0">
+            <i class="bi bi-plus-circle me-2 text-primary"></i>Nuevo Proyecto
+        </h5>
+        <a href="/admin/projects" class="btn btn-sm btn-outline-secondary">
+            <i class="bi bi-arrow-left me-1"></i>Volver
+        </a>
+    </div>
+
+    <div class="card-body p-4">
+        <form action="/admin/projects" method="POST" novalidate>
+
+            <div class="row g-3">
+                <div class="col-12">
+                    <label class="form-label fw-semibold">Título del proyecto <span class="text-danger">*</span></label>
+                    <input type="text" name="title" class="form-control" required maxlength="200">
+                </div>
+
+                <div class="col-12">
+                    <label class="form-label fw-semibold">Descripción</label>
+                    <textarea name="description" class="form-control" rows="4"></textarea>
+                </div>
+
+                <div class="col-12">
+                    <label class="form-label fw-semibold">Tecnologías</label>
+                    <input type="text" name="tech_stack" class="form-control"
+                           placeholder="ej: React, Node.js, PostgreSQL">
+                    <div class="form-text">Separa cada tecnología con una coma.</div>
+                </div>
+
+                <div class="col-12">
+                    <label class="form-label fw-semibold">URL de imagen</label>
+                    <input type="url" name="image_url" class="form-control"
+                           placeholder="https://ejemplo.com/imagen.jpg">
+                </div>
+
+                <div class="col-md-6">
+                    <label class="form-label fw-semibold"><i class="bi bi-github me-1"></i>GitHub URL</label>
+                    <input type="url" name="github_url" class="form-control"
+                           placeholder="https://github.com/usuario/repo">
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label fw-semibold"><i class="bi bi-box-arrow-up-right me-1"></i>Demo URL</label>
+                    <input type="url" name="demo_url" class="form-control"
+                           placeholder="https://mi-proyecto.com">
+                </div>
+
+                <div class="col-md-4">
+                    <label class="form-label fw-semibold">Orden de visualización</label>
+                    <input type="number" name="display_order" class="form-control" value="0" min="0">
+                </div>
+
+                <div class="col-md-4 d-flex align-items-end pb-2">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" name="is_featured" id="is_featured_new">
+                        <label class="form-check-label fw-semibold" for="is_featured_new">
+                            <i class="bi bi-star me-1"></i>Destacado
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex gap-2 mt-4">
+                <button type="submit" class="btn btn-primary px-4">
+                    <i class="bi bi-save me-2"></i>Crear proyecto
+                </button>
+                <a href="/admin/projects" class="btn btn-outline-secondary">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>

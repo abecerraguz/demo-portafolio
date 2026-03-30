@@ -30,9 +30,12 @@
                 </div>
 
                 <div class="col-12">
-                    <label class="form-label fw-semibold">URL de imagen</label>
-                    <input type="url" name="image_url" class="form-control"
-                           placeholder="https://ejemplo.com/imagen.jpg">
+                    <label class="form-label fw-semibold">Imagen del proyecto</label>
+                    <input type="file" id="image_upload" accept="image/*" class="form-control mb-2">
+                    <input type="hidden" name="image_url" id="image_url">
+                    <div class="form-text">Puedes subir una imagen (JPG, PNG, GIF, WEBP, máx. 5MB) o pegar una URL.</div>
+                    <div id="upload_status" class="small text-success"></div>
+                </div>
                 </div>
 
                 <div class="col-md-6">
@@ -68,5 +71,34 @@
                 <a href="/admin/projects" class="btn btn-outline-secondary">Cancelar</a>
             </div>
         </form>
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const fileInput = document.getElementById('image_upload');
+            const imageUrlInput = document.getElementById('image_url');
+            const statusDiv = document.getElementById('upload_status');
+            fileInput?.addEventListener('change', async function(e) {
+                const file = fileInput.files[0];
+                if (!file) return;
+                statusDiv.textContent = 'Subiendo imagen...';
+                const formData = new FormData();
+                formData.append('image', file);
+                try {
+                    const res = await fetch('/admin/projects/upload', {
+                        method: 'POST',
+                        body: formData
+                    });
+                    const data = await res.json();
+                    if (data.url) {
+                        imageUrlInput.value = data.url;
+                        statusDiv.textContent = 'Imagen subida correctamente.';
+                    } else {
+                        statusDiv.textContent = data.error || 'Error al subir imagen.';
+                    }
+                } catch (err) {
+                    statusDiv.textContent = 'Error al subir imagen.';
+                }
+            });
+        });
+        </script>
     </div>
 </div>

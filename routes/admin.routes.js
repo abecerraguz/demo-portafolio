@@ -22,6 +22,8 @@ import {
     handleUpdateProject,
     handleDeleteProject
 } from '../controllers/projects.controller.js';
+
+import { handleUploadImage } from '../controllers/projects.controller.js';
 import {
     showEducationList,
     showCreateEducation,
@@ -57,6 +59,9 @@ router.post('/projects',          requireAdminAuth, handleCreateProject);
 router.get ('/projects/:id/edit', requireAdminAuth, showEditProject);
 router.post('/projects/:id',      requireAdminAuth, handleUpdateProject);
 router.post('/projects/:id/delete', requireAdminAuth, handleDeleteProject);
+
+// Endpoint para subir imágenes
+router.post('/projects/upload', requireAdminAuth, handleUploadImage);
 
 // ── Educación ────────────────────────────────────────────────────────────────
 router.get ('/education',          requireAdminAuth, showEducationList);

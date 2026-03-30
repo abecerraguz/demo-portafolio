@@ -5,6 +5,8 @@ import cors from 'cors';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
+import fileUpload from 'express-fileupload';
+
 import { requestInfo } from '../middlewares/requestInfo.js';
 import { errorHandler } from '../middlewares/errorHandler.js';
 import { notFoundHandler } from '../middlewares/notFound.js';
@@ -61,6 +63,16 @@ class Server {
         this.app.use(express.urlencoded({ extended: true }));
         this.app.use(cookieParser());
         this.app.use(express.static(path.join(ROOT_DIR, 'public')));
+        // Servir archivos subidos desde /uploads
+        this.app.use('/uploads', express.static(path.join(ROOT_DIR, 'public', 'uploads')));
+        // Middleware para manejo de subida de archivos
+        this.app.use(fileUpload({
+            useTempFiles: false,
+            limits: { fileSize: 5 * 1024 * 1024 }, // 5MB
+            abortOnLimit: true,
+            safeFileNames: true,
+            preserveExtension: true
+        }));
         this.app.use(requestInfo);
     }
 

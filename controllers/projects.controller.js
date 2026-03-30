@@ -7,6 +7,9 @@ import {
 } from '../services/projects.service.js';
 import { sendSuccess } from '../utils/apiResponse.js';
 
+import path from 'path';
+import fs from 'fs';
+
 // ── Admin Web ──────────────────────────────────────────────────────────────
 export const showProjectsList = async (req, res, next) => {
     try {
@@ -61,6 +64,32 @@ export const showEditProject = async (req, res, next) => {
             success: req.query.success || null,
             error:   req.query.error   || null
         });
+    } catch (err) {
+        return next(err);
+    }
+};
+
+// ── Subida de imágenes ─────────────────────────────────────────────
+export const handleUploadImage = async (req, res, next) => {
+    try {
+        if (!req.files || !req.files.image) {
+            return res.status(400).json({ error: 'No se envió ningún archivo.' });
+        }
+        const image = req.files.image;
+        // Validar tipo de archivo (solo imágenes)
+        const allowedTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
+        if (!allowedTypes.includes(image.mimetype)) {
+            return res.status(400).json({ error: 'Tipo de archivo no permitido.' });
+        }
+        // Nombre seguro y ruta destino
+        const ext = path.extname(image.name);
+        const fileName = `project_${Date.now()}${ext}`;
+        const uploadPath = path.join(process.cwd(), 'public', 'uploads', fileName);
+        // Mover archivo
+        await image.mv(uploadPath);
+        // Devolver URL relativa
+        const fileUrl = `/uploads/${fileName}`;
+        return res.json({ url: fileUrl });
     } catch (err) {
         return next(err);
     }

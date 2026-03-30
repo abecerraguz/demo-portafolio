@@ -1,5 +1,5 @@
 import { AboutMe } from '../database/index.js';
-
+// Esto es una prueba
 export const getAboutMeService = async () => {
     return AboutMe.findOne({ where: { is_active: true } });
 };
